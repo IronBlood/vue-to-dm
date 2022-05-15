@@ -1,0 +1,16 @@
+{
+	"name": "vue-to-dm",
+	"version": "0.0.1",
+	"description": "Transform Vue SFC to PwC's Digital Maker compatible format",
+	"main": "src/index.ts",
+	"author": "IronBlood <aplshenyang@gmail.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"typescript": "^4.6.4"
+	},
+	"dependencies": {
+		"@babel/core": "^7.17.10",
+		"prettier": "2.6.2",
+		"vue-template-compiler": "^2.6.14"
+	}
+}
