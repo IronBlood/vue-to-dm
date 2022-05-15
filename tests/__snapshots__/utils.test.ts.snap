@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test rename filename rename Foo 1`] = `"foo"`;
+exports[`test rename filename rename FooComponent 1`] = `"foo_component"`;
+exports[`test rename filename rename foo-component 1`] = `"foo_component"`;
+exports[`test rename filename rename Foo-Component 1`] = `"foo_component"`;
+
