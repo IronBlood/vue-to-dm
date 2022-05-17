@@ -44,7 +44,7 @@ export default {
 };
 </script>
 `);
-	expect(result.code).toEqual(`export default {
+		expect(result.code).toEqual(`export default {
   data() {
     return {
       a: bar_component,
@@ -70,6 +70,23 @@ export default {
   }
 
 };`);
+	});
+
+	it("remove components property", () => {
+		const result = transform_vue_content(`
+<template>
+  <div></div>
+</template>
+<script>
+import a from "./foo";
+export default {
+  components: {
+    a,
+  },
+};
+</script>
+`);
+		expect(result.code).toEqual(`export default {};`);
 	});
 });
 

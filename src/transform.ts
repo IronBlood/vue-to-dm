@@ -90,6 +90,21 @@ const vue_script_transformer = (component_rename_map: Map<string, string>) => {
 					}
 				}
 			},
+			ExportDefaultDeclaration(babelPath: babel.NodePath) {
+				const node = babelPath.node as t.ExportDefaultDeclaration;
+				if (node.declaration.type === "ObjectExpression") {
+					const properties = node.declaration.properties;
+					for (let i = 0; i < properties.length; i++) {
+						const o = properties[i];
+						if (o.type === "ObjectProperty") {
+							if ((o.key as t.Identifier).name === "components") {
+								properties.splice(i, 1);
+								break;
+							}
+						}
+					}
+				}
+			},
 		},
 	});
 }
