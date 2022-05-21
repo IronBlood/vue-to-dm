@@ -8,6 +8,9 @@ import {
 	parseComponent,
 } from "vue-template-compiler";
 import {
+	transformHTML,
+} from "./html-transformer";
+import {
 	rename_to_underline,
 } from "./utils";
 
@@ -123,6 +126,7 @@ export const transform_vue_content = (content: string) => {
 	});
 
 	return {
+		template: transformHTML(code?.template?.content || "", component_rename_map),
 		code: output.code,
 	};
 }

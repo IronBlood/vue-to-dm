@@ -88,5 +88,28 @@ export default {
 `);
 		expect(result.code).toEqual(`export default {};`);
 	});
+
+	it("replace component in template", () => {
+		const result = transform_vue_content(`<template>
+  <div>
+    <a foo />
+    <a :src="dd"></a>
+    <a><div></div></a>
+  </div>
+</template>
+<script>
+import a from "./b.vue";
+export default {
+  components: { a },
+};
+</script>`);
+		expect(result.template).toEqual(`
+<div>
+  <b foo></b>
+  <b :src="dd"></b>
+  <b><div></div></b>
+</div>
+`);
+	});
 });
 
