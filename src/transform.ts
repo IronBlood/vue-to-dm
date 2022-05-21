@@ -142,7 +142,12 @@ export const transform_vue_content = (content: string): TransformResult => {
 export const transform_vue = (filename: string) => {
 	if (fs.statSync(filename).isFile()) {
 		const content = fs.readFileSync(filename, "utf8");
-		transform_vue_content(content);
+		const result = transform_vue_content(content);
+		const p = path.parse(filename);
+		result.component_name = rename_to_underline(p.name);
+		return result;
 	}
+
+	return null;
 }
 

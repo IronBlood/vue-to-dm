@@ -1,5 +1,7 @@
+import appRoot from "app-root-path";
 import {
 	transform_vue_content,
+	transform_vue,
 } from "../src/transform";
 
 describe("test transform_vue_content", () => {
@@ -110,6 +112,18 @@ export default {
   <b><div></div></b>
 </div>
 `);
+	});
+});
+
+describe("test transform_vue", () => {
+	it("test transform_vue .dummy_dir/a.vue", () => {
+		const result = transform_vue(`${appRoot}/tests/.dummy_dir/a.vue`);
+		expect(result).toEqual({
+			component_name: "a",
+			script: "export default {};",
+			style: "\n.test { }\n\n\n.foo { }\n",
+			template: "\n<div></div>\n",
+		});
 	});
 });
 
