@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import appRoot from "app-root-path";
 
 const is_vue_file = (filename: string): boolean => /\.vue$/.test(filename);
 
@@ -27,7 +28,7 @@ export interface ResolveFileOption {
 export const resolve_file = ({ filename, basepath }: ResolveFileOption): string | null => {
 	if (is_vue_file(filename)) {
 		if (/^@\//.test(filename))
-			return filename.replace("@", "./src");
+			return filename.replace("@", `${appRoot}/src`);
 		if (/^\./.test(filename)) {
 			const fullpath = path.resolve(basepath, filename);
 			return fullpath.replace(path.resolve("."), ".");

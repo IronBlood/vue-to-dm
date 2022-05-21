@@ -1,3 +1,4 @@
+import appRoot from "app-root-path";
 import {
 	walk_dir,
 	resolve_file
@@ -5,13 +6,12 @@ import {
 
 describe("test walk_dir", () => {
 	it("dummy dir", () => {
-		// running from project root
-		const list = walk_dir("./tests/.dummy_dir");
+		const list = walk_dir(`${appRoot}/tests/.dummy_dir`);
 		expect(list.length).toBe(3);
 		expect(list).toEqual(expect.arrayContaining([
-			"./tests/.dummy_dir/a.vue",
-			"./tests/.dummy_dir/b/b.vue",
-			"./tests/.dummy_dir/c/c/c.vue",
+			`${appRoot}/tests/.dummy_dir/a.vue`,
+			`${appRoot}/tests/.dummy_dir/b/b.vue`,
+			`${appRoot}/tests/.dummy_dir/c/c/c.vue`,
 		]));
 	});
 });
@@ -21,7 +21,7 @@ describe("test resolve_file", () => {
 		expect(resolve_file({
 			filename: "@/views/a.vue",
 			basepath: ".",
-		})).toEqual("./src/views/a.vue");
+		})).toEqual(`${appRoot}/src/views/a.vue`);
 	});
 
 	test("fs", () => {
