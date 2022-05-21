@@ -10,7 +10,7 @@ describe("test transform_vue_content", () => {
 <script>
 import a from "./foo";
 </script>`);
-		expect(result.code).toEqual("");
+		expect(result.script).toEqual("");
 	});
 
 	it("convert component_name", () => {
@@ -44,7 +44,7 @@ export default {
 };
 </script>
 `);
-		expect(result.code).toEqual(`export default {
+		expect(result.script).toEqual(`export default {
   data() {
     return {
       a: bar_component,
@@ -86,7 +86,7 @@ export default {
 };
 </script>
 `);
-		expect(result.code).toEqual(`export default {};`);
+		expect(result.script).toEqual(`export default {};`);
 	});
 
 	it("replace component in template", () => {

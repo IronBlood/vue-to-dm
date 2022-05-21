@@ -112,7 +112,14 @@ const vue_script_transformer = (component_rename_map: Map<string, string>) => {
 	});
 }
 
-export const transform_vue_content = (content: string) => {
+export interface TransformResult {
+	template: string;
+	script: string;
+	style: string | null;
+	component_name?: string;
+}
+
+export const transform_vue_content = (content: string): TransformResult => {
 	const code = parseComponent(content);
 
 	const script = code?.script?.content || `export default {};`;
@@ -127,7 +134,8 @@ export const transform_vue_content = (content: string) => {
 
 	return {
 		template: transformHTML(code?.template?.content || "", component_rename_map),
-		code: output.code,
+		script: output.code,
+		style: code?.styles.map(block => block.content).join("\n"),
 	};
 }
 
