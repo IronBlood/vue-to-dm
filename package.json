@@ -16,6 +16,8 @@
 	},
 	"dependencies": {
 		"@babel/core": "^7.17.10",
+		"posthtml-parser": "^0.11.0",
+		"posthtml-render": "^3.0.0",
 		"prettier": "2.6.2",
 		"vue-template-compiler": "^2.6.14"
 	}
