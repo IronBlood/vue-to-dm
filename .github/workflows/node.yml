@@ -1,0 +1,25 @@
+name: vue-to-dm ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+      - run: yarn install --immutable
+      - run: yarn test
+      - uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.coveralls }}
+
+
