@@ -19,11 +19,15 @@ export const build = (dirs: string[], options: BuildOptions = {}): void => {
 		arrowParens: "avoid",
 	};
 
-	// TODO check files exist
-	if (!fs.existsSync(dist_dir))
-		fs.mkdirSync(dist_dir);
-	if (!fs.existsSync(comp_dir))
-		fs.mkdirSync(comp_dir);
+	for (const p of [ comp_dir, dist_dir ]) {
+		if (fs.existsSync(p)) {
+			logger.dist_exist(p);
+			return;
+		}
+	}
+
+	fs.mkdirSync(dist_dir);
+	fs.mkdirSync(comp_dir);
 
 	const vue_files: string[] = [];
 	dirs.forEach(dir => {

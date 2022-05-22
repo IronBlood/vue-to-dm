@@ -26,3 +26,7 @@ export const dup = (component: string, filename: string) => {
 	console.log(`${WARN} ${comp(component)} exists, it will be overrided from ${file(filename)}`);
 };
 
+export const dist_exist = (path: string) => {
+	console.log(`${ERROR} ${file(path)} exists, please remove it manually`);
+};
+
