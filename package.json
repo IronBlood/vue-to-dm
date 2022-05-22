@@ -2,10 +2,22 @@
 	"name": "vue-to-dm",
 	"version": "0.0.1",
 	"description": "Transform Vue SFC to PwC's Digital Maker compatible format",
+	"keywords": [
+		"Vue SFC",
+		"Digital Maker",
+		"PwC"
+	],
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"files": "dist/**/*",
-	"author": "IronBlood <aplshenyang@gmail.com>",
+	"author": "Yang Shen <aplshenyang@gmail.com>",
+	"repository": "github:IronBlood/vue-to-dm",
+	"homepage": "https://github.com/IronBlood/vue-to-dm#readme",
+	"bugs": "https://github.com/IronBlood/vue-to-dm/issues",
+	"funding": {
+		"type": "patreon",
+		"url": "https://www.patreon.com/IronBlood"
+	},
 	"license": "MIT",
 	"scripts": {
 		"build": "tsc",
