@@ -36,7 +36,10 @@ export const build = (dirs: string[], options: BuildOptions = {}): void => {
 			"<template>", vue.template, "</template>", "",
 			"<script>", vue.script, "</script>",
 		].join("\n");
-		styles.push(vue.style);
+
+		if (vue.style)
+			styles.push(vue.style);
+
 		const final = prettier.format(content, prettier_options);
 		const target_name = `${comp_dir}/${vue.component_name}.vue`;
 		fs.writeFileSync(target_name, final, "utf8");
