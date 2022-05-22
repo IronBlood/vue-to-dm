@@ -3,6 +3,7 @@ import appRoot from "app-root-path";
 import prettier, { Options as PrettierOptions } from "prettier";
 import { walk_dir } from "./file";
 import { transform_vue } from "./transform";
+import * as logger from "./logger";
 
 export interface BuildOptions {
 	dist_dir?: string;
@@ -37,13 +38,23 @@ export const build = (dirs: string[], options: BuildOptions = {}): void => {
 			"<script>", vue.script, "</script>",
 		].join("\n");
 
+		if (vue.template.indexOf("`") >= 0) {
+			logger.backtick(filename);
+		}
+
 		if (vue.style)
 			styles.push(vue.style);
 
 		const final = prettier.format(content, prettier_options);
 		const target_name = `${comp_dir}/${vue.component_name}.vue`;
+
+		if (fs.existsSync(target_name)) {
+			logger.dup(vue.component_name, filename);
+		}
+
 		fs.writeFileSync(target_name, final, "utf8");
-		// TODO print build log
+
+		logger.finish(vue.component_name, filename);
 	});
 
 	// output css
