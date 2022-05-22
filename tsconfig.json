@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"declaration": true,
+		"esModuleInterop": true,
+		"module": "commonjs",
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"outDir": "dist",
+		"skipLibCheck": true,
+		"target": "esnext"
+	},
+	"include": ["./src/**/*.ts"]
+}

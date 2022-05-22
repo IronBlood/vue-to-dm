@@ -2,10 +2,13 @@
 	"name": "vue-to-dm",
 	"version": "0.0.1",
 	"description": "Transform Vue SFC to PwC's Digital Maker compatible format",
-	"main": "src/index.ts",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": "dist/**/*",
 	"author": "IronBlood <aplshenyang@gmail.com>",
 	"license": "MIT",
 	"scripts": {
+		"build": "tsc",
 		"test": "jest --coverage"
 	},
 	"devDependencies": {
