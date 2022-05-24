@@ -127,6 +127,7 @@ export const transform_vue_content = (content: string): TransformResult => {
 	const component_rename_map = new Map<string, string>();
 
 	const output = transformSync(script, {
+		configFile: false,
 		plugins: [
 			vue_script_transformer(component_rename_map),
 		],
