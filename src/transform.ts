@@ -145,6 +145,7 @@ export const transform_vue_content = (content: string): TransformResult => {
 
 	const output = transformSync(script, {
 		configFile: false,
+		retainLines: true,
 		plugins: [
 			vue_script_transformer(component_rename_map),
 		],

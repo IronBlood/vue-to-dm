@@ -49,13 +49,18 @@ export default {
 };
 </script>
 `);
-		expect(result.script).toEqual(`export default {
+		expect(result.script).toEqual(`
+
+
+export default {
   data() {
     return {
       a: bar_component,
-      y: bar_component
-    };
+      y: bar_component };
+
   },
+
+
 
   mounted() {
     let b = bar_component;
@@ -66,15 +71,11 @@ export default {
     bar_component++;
     b = bar_component + 1;
     bar_component ? bar_component : bar_component;
-
     if (bar_component) {
       bar_component;
     }
-
     bar_component;
-  }
-
-};`);
+  } };`);
 	});
 
 	it("remove components property", () => {
@@ -91,7 +92,7 @@ export default {
 };
 </script>
 `);
-		expect(result.script).toEqual(`export default {};`);
+		expect(result.script).toEqual("\n\nexport default {};");
 	});
 
 	it("replace component in template", () => {
@@ -123,7 +124,7 @@ describe("test transform_vue", () => {
 		const result = transform_vue(`${appRoot}/tests/.dummy_dir/a.vue`);
 		expect(result).toEqual({
 			component_name: "a",
-			script: "export default {};",
+			script: "\nexport default {};",
 			style: "\n.test { }\n\n\n.foo { }\n",
 			template: "\n<div></div>\n",
 		});
