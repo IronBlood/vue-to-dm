@@ -30,3 +30,7 @@ export const dist_exist = (path: string) => {
 	console.log(`${ERROR} ${file(path)} exists, please remove it manually`);
 };
 
+export const spread = (name: string) => {
+	console.log(`${ERROR} SpreadElement ${comp(name)} is not supported`);
+};
+

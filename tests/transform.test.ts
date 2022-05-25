@@ -20,7 +20,7 @@ import a from "./foo";
   <div></div>
 </template>
 <script>
-import a from "./BarComponent.vue";
+import a from "./BarComponent";
 
 export default {
   data() {
@@ -28,6 +28,9 @@ export default {
       a,
       y: a,
     };
+  },
+  components: {
+    a,
   },
   mounted() {
     let b = a;

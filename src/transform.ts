@@ -13,20 +13,18 @@ import {
 import {
 	rename_to_underline,
 } from "./utils";
+import * as logger from "./logger";
 
 const vue_script_transformer = (component_rename_map: Map<string, string>) => {
+	const import_default_map = new Map<string, string>();
 	return () => ({
 		visitor: {
 			ImportDeclaration(babelPath: babel.NodePath) {
 				const node = babelPath.node as t.ImportDeclaration;
-				if (/\.vue$/.test(node.source.value)) {
-					const p = path.parse(node.source.value);
+				if (/^((@\/)|(\.))/.test(node.source.value)) {
 					for (const specifier of node.specifiers) {
 						if (specifier.type === "ImportDefaultSpecifier") {
-							const component_name = rename_to_underline(p.name);
-							if (specifier.local.name != component_name) {
-								component_rename_map.set(specifier.local.name, component_name);
-							}
+							import_default_map.set(specifier.local.name, node.source.value);
 							break;
 						}
 					}
@@ -101,6 +99,25 @@ const vue_script_transformer = (component_rename_map: Map<string, string>) => {
 						const o = properties[i];
 						if (o.type === "ObjectProperty") {
 							if ((o.key as t.Identifier).name === "components") {
+								if (o.value.type === "ObjectExpression") {
+									const components = o.value;
+
+									components.properties.forEach(c => {
+										if (c.type === "ObjectMethod" || c.type === "ObjectProperty") {
+											const original_name = (c.key as t.Identifier).name;
+											if (import_default_map.has(original_name)) {
+												const p = import_default_map.get(original_name),
+													filename = path.parse(p).name,
+													component_name = rename_to_underline(filename);
+												if (component_name !== original_name) {
+													component_rename_map.set(original_name, component_name);
+												}
+											}
+										} else { // spread element
+											logger.spread((c.argument as t.Identifier).name);
+										}
+									});
+								}
 								properties.splice(i, 1);
 								break;
 							}
