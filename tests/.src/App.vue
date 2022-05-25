@@ -2,7 +2,13 @@
 <div></div>
 </template>
 
-<script>export default {
+<script>
+const a = "";
+
+// test
+const b ="";
+
+export default {
 data() { return {}; },
 	mounted() {
 },

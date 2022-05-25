@@ -25,7 +25,43 @@ describe("test build", () => {
 		build([dir_src], {
 			dist_dir: dir_dist,
 		});
-		// FIXME check output files
+		const filename = `${dir_dist}/components/app.vue`;
+		expect(fs.existsSync(filename)).toBeTruthy();
+		const result = `<template>
+	<div></div>
+</template>
+
+<script>
+const a = "";
+
+// test
+const b = "";
+
+export default {
+	data() {
+		return {};
+	},
+	mounted() {},
+};
+</script>
+`;
+		expect(fs.readFileSync(filename, "utf8")).toEqual(result);
+
+		const css = `${dir_dist}/app.css`;
+		expect(fs.existsSync(css)).toBeTruthy();
+
+		const css_content = `.foo1 {
+	display: flex;
+}
+.foo2 {
+	display: block;
+}
+
+.foo3 {
+	display: hidden;
+}
+`
+		expect(fs.readFileSync(css, "utf8")).toEqual(css_content);
 	});
 });
 
