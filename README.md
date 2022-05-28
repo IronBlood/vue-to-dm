@@ -9,6 +9,24 @@ This utility helps to transform Vue SFC files to PwC Digital Maker compatible SF
 * Renaming names of components based on their filenames in `underlined_lowercased_style`. Usages in templates will also be transformed automatically. These names will be used as registered components in Digital Maker.
 * Combining all `style` blocks into a single `app.css` file.
 
+**DISCLAMER**
+
+* This utility is *NOT* a compiler or bundler. Please use [Vue CLI](https://cli.vuejs.org/), [Vite](https://vitejs.dev/) or any other tools to build your project first to make sure everything works. Then use `vue-to-dm` to transform Vue SFC files.
+* Currently DM uses Vue 2.x, and `vue-to-dm` doesn't transform any API level source code.
+* `vue-to-dm` only supports JavaScript as `<script />` blocks and CSS as `<style />` blocks, [TypeScript](https://www.typescriptlang.org/), [SCSS](https://sass-lang.com/) are not supported yet.
+* External libraries, scripts, stylesheets are not bundled.
+* JavaScript is a flexible language, the sample code below might work with vue compiler, but `vue-to-dm` is a limited utility, please avoid such usage.
+
+```javascript
+import components from "@/components.js";
+
+export default {
+  components: {
+    ...components,
+  }
+};
+```
+
 ## Usage
 
 Install:
